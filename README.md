@@ -4,17 +4,13 @@
 
 
 
-## ※※注意※※
-
-現段階では横の動画を縦に直すくらいしかできてません．
-
-
-
 ## 使い方
 
 1. フォルダ内に編集したい動画を```original.mp4```として保存する
 2. ```PriEditor.py```を実行
 3. 実行結果が```output.mp4```として出力される
+
+
 
 
 
@@ -42,3 +38,9 @@ https://www.ffmpeg.org/download.html
 ffmpyは下記URLを参照してください．（pipで入ります）
 
 http://ffmpy.readthedocs.io/en/latest/
+
+
+
+## 顔認識について
+
+本プログラムの顔認識は[nagadomi様のlbpcascade_animeface.xml](https://github.com/nagadomi/lbpcascade_animeface)を使用しています．関係者各位に感謝いたします．

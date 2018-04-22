@@ -15,22 +15,26 @@ def Rot90(image):
     return rotated_image
 
 
-def RotMovie(movie_path, output_path):
+def RotMovie(movie_path, output_path, faces_path):
     cap = cv2.VideoCapture(movie_path)
     fps = cap.get(cv2.CAP_PROP_FPS)
 
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     output = cv2.VideoWriter(output_path, fourcc, fps, (1080, 1920))
 
+    frame_count = 0
     while(cap.isOpened()):
         ret, frame = cap.read()
         try:
             frame = Rot90(frame)
             output.write(frame)
+            if frame_count%20 == 0:
+                FaceTrim(frame_count, frame, faces_path)
         except AttributeError:
             break
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+        frame_count += 1
 
     cap.release()
     output.release()
@@ -67,13 +71,27 @@ def FaceDetect(image):
     return faces
 
 
+def FaceTrim(image_num, image, faces_path):
+    if not os.path.exists(faces_path):
+        os.makedirs(faces_path)
+
+    faces = FaceDetect(image)
+
+    for i, (x,y,w,h) in enumerate(faces):
+        if h>100:
+            face_image = image[y-int(0.3*h):y+h+int(0.2*h), x:x+w]
+            face_path = faces_path + '/' + str(image_num) + '_' + str(i) + '.png'
+            cv2.imwrite(face_path, face_image)
+
+
 if __name__ == '__main__':
     original_path = 'original.mp4'
     rotated_movie_path = 'rotated.mp4'
     audio_path = 'audio.mp4'
     output_path = 'output.mp4'
+    faces_path = './faces'
 
-    RotMovie(original_path, rotated_movie_path)
+    RotMovie(original_path, rotated_movie_path, faces_path)
     print('Rotated!')
     MakeAudio(original_path, audio_path)
     print('make audio!')
