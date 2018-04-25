@@ -78,10 +78,12 @@ def FaceTrim(image_num, image, faces_path):
     faces = FaceDetect(image)
 
     for i, (x,y,w,h) in enumerate(faces):
-        if h>100:
-            y_1 = max(0, y-int(0.3*h))
-            y_2 = min(1920, y+h+int(0.2*h))
-            face_image = image[y_1:y_2, x:x+w]
+        if h > 100:
+            y1 = max(0, y-int(0.4*h))
+            y2 = min(1920, y+h+int(1.3*h))
+            x1 = max(0, x-int(0.5*w))
+            x2 = min(1920, x+w+int(0.5*w))
+            face_image = image[y1:y2, x1:x2]
             face_path = faces_path + '/' + str(image_num) + '_' + str(i) + '.png'
             cv2.imwrite(face_path, face_image)
 
@@ -91,12 +93,14 @@ if __name__ == '__main__':
     rotated_movie_path = 'rotated.mp4'
     audio_path = 'audio.mp4'
     output_path = 'output.mp4'
-    faces_path = './faces'
+    faces_path = './images'
 
     RotMovie(original_path, rotated_movie_path, faces_path)
     print('Rotated!')
+    
     MakeAudio(original_path, audio_path)
     print('made audio!')
+    
     MakeMovie(rotated_movie_path, audio_path, output_path)
     print('made movie!')
     
@@ -106,5 +110,6 @@ if __name__ == '__main__':
     if os.path.exists(audio_path):
         os.remove(audio_path)
     print('finish all process!!')
+    
     
     
