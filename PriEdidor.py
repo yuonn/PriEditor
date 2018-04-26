@@ -139,22 +139,5 @@ if __name__ == '__main__':
     images_path = './images'
 
     main(movies_path, rotated_movie_path, audio_path, outputs_path, images_path)
-'''
-    RotMovie(original_path, rotated_movie_path, faces_path)
-    print('Rotated!')
-    
-    MakeAudio(original_path, audio_path)
-    print('made audio!')
-    
-    MakeMovie(rotated_movie_path, audio_path, output_path)
-    print('made movie!')
-    
-    print('start final process')
-    if os.path.exists(rotated_movie_path):
-        os.remove(rotated_movie_path)
-    if os.path.exists(audio_path):
-        os.remove(audio_path)
-    print('finish all process!!')
-'''
     
     
