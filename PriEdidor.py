@@ -1,6 +1,8 @@
 import cv2
 import ffmpy
 import os
+import glob
+import re
 import numpy as np
 
 
@@ -88,13 +90,56 @@ def FaceTrim(image_num, image, faces_path):
             cv2.imwrite(face_path, face_image)
 
 
+def RenameFiles(path, extension):
+    movie_dir = glob.glob(path + '/*')
+    
+    for i, file_name in enumerate(movie_dir):
+        movie_path = path + '/' + str(i) + extension
+        if not os.path.exists(movie_path):
+            os.rename(file_name, os.path.join(path, str(i) + extension))
+
+
+def main(movies_path, rotated_movie_path, audio_path, outputs_path, images_path):
+    RenameFiles(movies_path, '.mp4')
+
+    movies = os.listdir(movies_path)
+    count = 0
+    for f in movies:
+        index = re.search('.mp4', f)
+        if index:
+            count += 1
+
+    for i in range(count):
+        movie_path = movies_path + '/' + str(i) + '.mp4'
+
+        image_path = images_path + '/' + str(i)
+        RotMovie(movie_path, rotated_movie_path, image_path)
+        print('Rotated!')
+        
+        MakeAudio(movie_path, audio_path)
+        print('made audio!')
+        
+        output_path = outputs_path + '/' + str(i) + '.mp4'
+        MakeMovie(rotated_movie_path, audio_path, output_path)
+        print('made movie!')
+        
+        print('start final process')
+        if os.path.exists(rotated_movie_path):
+            os.remove(rotated_movie_path)
+        if os.path.exists(audio_path):
+            os.remove(audio_path)
+        print('finish all process!!')
+
+
 if __name__ == '__main__':
-    original_path = 'original.mp4'
+    movies_path = './movies'
     rotated_movie_path = 'rotated.mp4'
     audio_path = 'audio.mp4'
-    output_path = 'output.mp4'
-    faces_path = './images'
+    outputs_path = './outputs'
+    images_path = './images'
 
+    main(movies_path, rotated_movie_path, audio_path, outputs_path, images_path)
+'''
     RotMovie(original_path, rotated_movie_path, faces_path)
     print('Rotated!')
     
@@ -110,6 +155,6 @@ if __name__ == '__main__':
     if os.path.exists(audio_path):
         os.remove(audio_path)
     print('finish all process!!')
-    
+'''
     
     
