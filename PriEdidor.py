@@ -80,7 +80,7 @@ def FaceTrim(image_num, image, faces_path):
     faces = FaceDetect(image)
 
     for i, (x,y,w,h) in enumerate(faces):
-        if h > 100:
+        if h > 250:
             y1 = max(0, y-int(0.4*h))
             y2 = min(1920, y+h+int(1.3*h))
             x1 = max(0, x-int(0.5*w))
