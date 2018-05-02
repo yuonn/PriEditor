@@ -65,11 +65,29 @@ def MakeMovie(movie_path, audio_path, output_path):
     ff.run()
 
 
+def DegreeOfSimilarity(image, temp):
+    match = cv2.matchTemplate(image, temp, cv2.TM_SQDIFF)
+    min_value, max_value, min_pt, max_pt = cv2.minMaxLoc(match)
+    return min_value
+
+
+def TrimFlag(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    temp_list = os.listdir('./templates')
+    for temp_path in temp_list:
+        temp = cv2.imread('./templates/' + temp_path)
+        temp = cv2.cvtColor(temp, cv2.COLOR_RGB2GRAY)
+        temp = temp[30:temp.shape[0]-30, 30:temp.shape[1]-30]
+        if gray.shape[0] >= temp.shape[0] and gray.shape[1] >= temp.shape[1]:
+            if DegreeOfSimilarity(gray, temp) < 50000000:
+                return False
+    return True
+
+
 def FaceDetect(image):
     face_cascade = cv2.CascadeClassifier('lbpcascade_animeface.xml')
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray)
-    
     return faces
 
 
@@ -80,14 +98,15 @@ def FaceTrim(image_num, image, faces_path):
     faces = FaceDetect(image)
 
     for i, (x,y,w,h) in enumerate(faces):
-        if h > 250:
+        if h > 100:
             y1 = max(0, y-int(0.4*h))
             y2 = min(1920, y+h+int(1.3*h))
             x1 = max(0, x-int(0.5*w))
             x2 = min(1920, x+w+int(0.5*w))
             face_image = image[y1:y2, x1:x2]
-            face_path = faces_path + '/' + str(image_num) + '_' + str(i) + '.png'
-            cv2.imwrite(face_path, face_image)
+            if TrimFlag(face_image):
+                face_path = faces_path + '/' + str(image_num) + '_' + str(i) + '.png'
+                cv2.imwrite(face_path, face_image)
 
 
 def RenameFiles(path, extension):
@@ -139,5 +158,3 @@ if __name__ == '__main__':
     images_path = './images'
 
     main(movies_path, rotated_movie_path, audio_path, outputs_path, images_path)
-    
-    
