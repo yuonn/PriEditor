@@ -102,7 +102,7 @@ def FaceTrim(image_num, image, faces_path):
             y1 = max(0, y-int(0.4*h))
             y2 = min(1920, y+h+int(1.3*h))
             x1 = max(0, x-int(0.5*w))
-            x2 = min(1920, x+w+int(0.5*w))
+            x2 = min(1080, x+w+int(0.5*w))
             face_image = image[y1:y2, x1:x2]
             if TrimFlag(face_image):
                 face_path = faces_path + '/' + str(image_num) + '_' + str(i) + '.png'
