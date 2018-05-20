@@ -37,13 +37,14 @@ def ScreenShot(movie_path, output_path):
 
 def FlagOfSimilarity(image, temp_list):
     
-    image = image[1500:1920, :]
+    image = image[1500:1900, :]
     
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     for temp in temp_list:
-        match = cv2.matchTemplate(gray, temp, cv2.TM_SQDIFF)
-        min_value, max_value, min_pt, max_pt = cv2.minMaxLoc(match)    
-        if min_value < 79000000:
+        match = cv2.matchTemplate(gray, temp, cv2.TM_CCOEFF_NORMED)
+        min_value, max_value, min_pt, max_pt = cv2.minMaxLoc(match)
+        print(max_value)
+        if max_value > 0.3:
             return True
     
     return False
