@@ -18,7 +18,7 @@ def ScreenShot(movie_path, output_path):
     while(cap.isOpened()):
         ret, frame = cap.read()
         try:
-            if frame_count%50 == 0:
+            if frame_count%20 == 0:
                 if FlagOfSimilarity(frame, temp_list):
                     image_path = output_path + '/' + str(YTM_count) + '.png'
                     cv2.imwrite(image_path, frame)
