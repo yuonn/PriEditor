@@ -25,7 +25,7 @@ def ScreenShot(movie_path, output_path):
                     YTM_count += 1
         except:
             break
-        if YTM_count >= 50:
+        if YTM_count >= 12:
             break
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -44,7 +44,7 @@ def FlagOfSimilarity(image, temp_list):
         match = cv2.matchTemplate(gray, temp, cv2.TM_CCOEFF_NORMED)
         min_value, max_value, min_pt, max_pt = cv2.minMaxLoc(match)
         print(max_value)
-        if max_value > 0.3:
+        if max_value > 0.9:
             return True
     
     return False
