@@ -18,11 +18,11 @@ def ScreenShot(movie_path, output_path):
     while(cap.isOpened()):
         ret, frame = cap.read()
         try:
-            if frame_count%20 == 0:
-                if FlagOfSimilarity(frame, temp_list):
-                    image_path = output_path + '/' + str(YTM_count) + '.png'
-                    cv2.imwrite(image_path, frame)
-                    YTM_count += 1
+        if ret and frame_count%20 == 0:
+            if FlagOfSimilarity(frame, temp_list):
+                image_path = output_path + '/' + str(YTM_count) + '.png'
+                cv2.imwrite(image_path, frame)
+                YTM_count += 1
         except:
             break
         if YTM_count >= 12:
@@ -37,7 +37,7 @@ def ScreenShot(movie_path, output_path):
 
 def FlagOfSimilarity(image, temp_list):
     
-    image = image[1500:1900, :]
+    image = image[1500:1900, 0:300]
     
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     for temp in temp_list:
