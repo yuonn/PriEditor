@@ -16,7 +16,7 @@ def FaceTrim(movie_path, output_path):
     while(cap.isOpened()):
         ret, frame = cap.read()
         try:
-            if frame_count%100 == 0:
+            if frame_count%50 == 0:
                 faces = FaceDetect(frame)
                 for i, (x,y,w,h) in enumerate(faces):
                     y1 = max(0, y-int(0.4*h))
@@ -24,7 +24,7 @@ def FaceTrim(movie_path, output_path):
                     x1 = max(0, x-int(0.5*w))
                     x2 = min(1080, x+w+int(0.5*w))
                     face_image = frame[y1:y2, x1:x2]
-                    if h > 100 and TrimFlag(face_image, temp_list):
+                    if h > 200 and TrimFlag(face_image, temp_list):
                         face_path = output_path + '/' + str(frame_count) + '_' + str(i) + '.png'
                         cv2.imwrite(face_path, face_image)
         except:
