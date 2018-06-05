@@ -5,7 +5,7 @@ import re
 import numpy as np
 
 
-def FaceTrim(movie_path, output_path):
+def face_trim(movie_path, output_path):
     temp_dir = os.listdir('./templates')
     temp_list = []
     for temp_path in temp_dir:
@@ -16,15 +16,15 @@ def FaceTrim(movie_path, output_path):
     while(cap.isOpened()):
         ret, frame = cap.read()
         try:
-            if frame_count%50 == 0:
-                faces = FaceDetect(frame)
+            if frame_count%100 == 0:
+                faces = face_detect(frame)
                 for i, (x,y,w,h) in enumerate(faces):
                     y1 = max(0, y-int(0.4*h))
                     y2 = min(1920, y+h+int(1.3*h))
                     x1 = max(0, x-int(0.5*w))
                     x2 = min(1080, x+w+int(0.5*w))
                     face_image = frame[y1:y2, x1:x2]
-                    if h > 200 and TrimFlag(face_image, temp_list):
+                    if h > 200 and trim_flag(face_image, temp_list):
                         face_path = output_path + '/' + str(frame_count) + '_' + str(i) + '.png'
                         cv2.imwrite(face_path, face_image)
         except:
@@ -37,30 +37,30 @@ def FaceTrim(movie_path, output_path):
     cv2.destroyAllWindows()
 
 
-def FaceDetect(image):
+def face_detect(image):
     face_cascade = cv2.CascadeClassifier('lbpcascade_animeface.xml')
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray)
     return faces
 
 
-def TrimFlag(image, temp_list):
+def trim_flag(image, temp_list):
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     for temp in temp_list:
         temp = temp[30:temp.shape[0]-30, 30:temp.shape[1]-30]
         if gray.shape[0] >= temp.shape[0] and gray.shape[1] >= temp.shape[1]:
-            if DegreeOfSimilarity(gray, temp) > 0.9:
+            if degree_of_similarity(gray, temp) > 0.9:
                 return False
     return True
 
 
-def DegreeOfSimilarity(image, temp):
+def degree_of_similarity(image, temp):
     match = cv2.matchTemplate(image, temp, cv2.TM_CCOEFF_NORMED)
     min_value, max_value, min_pt, max_pt = cv2.minMaxLoc(match)
     return min_value
 
 
-def RenameFiles(path, extension):
+def rename_files(path, extension):
     movie_dir = glob.glob(path + '/*')
     
     for i, file_name in enumerate(movie_dir):
@@ -70,7 +70,7 @@ def RenameFiles(path, extension):
 
 
 def main(movies_path, images_path):
-    RenameFiles(movies_path, '.mp4')
+    rename_files(movies_path, '.mp4')
 
     movies = os.listdir(movies_path)
     count = 0
@@ -84,7 +84,7 @@ def main(movies_path, images_path):
         image_path = images_path + '/' + str(i)
         if not os.path.exists(image_path):
             os.makedirs(image_path)
-        FaceTrim(movie_path, image_path)
+        face_trim(movie_path, image_path)
 
 
 if __name__ == '__main__':

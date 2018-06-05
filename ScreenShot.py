@@ -5,7 +5,7 @@ import re
 import numpy as np
 
 
-def ScreenShot(movie_path, output_path):
+def screen_shot(movie_path, output_path):
     temp_dir = os.listdir('./matcher')
     temp_list = []
     for temp_path in temp_dir:
@@ -18,7 +18,7 @@ def ScreenShot(movie_path, output_path):
     while(cap.isOpened()):
         ret, frame = cap.read()
         try:
-            if frame_count%20 == 0 and FlagOfSimilarity(frame, temp_list):
+            if frame_count%20 == 0 and flag_of_similarity(frame, temp_list):
                 image_path = output_path + '/' + str(YTM_count) + '.png'
                 cv2.imwrite(image_path, frame)
                 YTM_count += 1
@@ -34,7 +34,7 @@ def ScreenShot(movie_path, output_path):
     cv2.destroyAllWindows()
 
 
-def FlagOfSimilarity(image, temp_list):
+def flag_of_similarity(image, temp_list):
     
     image = image[1500:1900, 0:300]
     
@@ -49,7 +49,7 @@ def FlagOfSimilarity(image, temp_list):
     return False
 
 
-def RenameFiles(path, extension):
+def rename_files(path, extension):
     movie_dir = glob.glob(path + '/*')
     
     for i, file_name in enumerate(movie_dir):
@@ -59,7 +59,7 @@ def RenameFiles(path, extension):
 
 
 def main(movies_path, images_path):
-    RenameFiles(movies_path, '.mp4')
+    rename_files(movies_path, '.mp4')
 
     movies = os.listdir(movies_path)
     count = 0
@@ -73,7 +73,7 @@ def main(movies_path, images_path):
         image_path = images_path + '/' + str(i)
         if not os.path.exists(image_path):
             os.makedirs(image_path)
-        ScreenShot(movie_path, image_path)
+        screen_shot(movie_path, image_path)
 
 
 if __name__ == '__main__':
