@@ -5,7 +5,7 @@ import re
 import numpy as np
 
 
-def screen_shot(movie_path, output_path):
+def YTM_shot(movie_path, output_path):
     temp_dir = os.listdir('./matcher')
     temp_list = []
     for temp_path in temp_dir:
@@ -73,7 +73,7 @@ def main(movies_path, images_path):
         image_path = images_path + '/' + str(i)
         if not os.path.exists(image_path):
             os.makedirs(image_path)
-        screen_shot(movie_path, image_path)
+        YTM_shot(movie_path, image_path)
 
 
 if __name__ == '__main__':
