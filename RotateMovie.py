@@ -8,11 +8,21 @@ def rot_movie(movie_path, output_path):
     if os.path.exists(output_path):
         os.remove(output_path)
     
-    ff = ffmpy.FFmpeg(
+    pass1 = ffmpy.FFmpeg(
         inputs={movie_path : None},
-        outputs={output_path : '-vf "transpose=2"'}
+        outputs={output_path : '-b:v 10240k -s 1080x1920 -pass 1 -passlogfile "passlog" -vf "transpose=2" -y -vsync 1 -an'}
     )
-    ff.run()
+    print(pass1.cmd)
+    pass1.run()
+
+    pass2 = ffmpy.FFmpeg(
+        inputs={movie_path : None},
+        outputs={output_path : '-b:v 10240k -s 1080x1920 -pass 2 -passlogfile "passlog" -vf "transpose=2" -y -vsync 1'}
+    )
+    print(pass2.cmd)
+    pass2.run()
+
+
 
 
 def rename_files(path, extension):
