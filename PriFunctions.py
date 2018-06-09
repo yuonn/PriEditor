@@ -11,6 +11,19 @@ class PriFunctions:
         self.movie_dir = './outputs'
         self.face_dir = './faces'
         self.YTM_dir = './YTMshot'
+    
+
+    def set_recmovie_dir(self, path):
+        self.recmovie_dir = path
+
+    def set_movie_dir(self, path):
+        self.movie_dir = path
+    
+    def set_face_dir(self, path):
+        self.recmovie_dir = path
+    
+    def set_YTM_dir(self, path):
+        self.YTM_dir = path
 
 
     def __rename_files(self, path, extension):
