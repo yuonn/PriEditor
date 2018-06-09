@@ -78,6 +78,6 @@ def main(movies_path, images_path):
 
 if __name__ == '__main__':
     movies_path = './outputs'
-    outputs_path = './screenshot'
+    outputs_path = './YTMshot'
 
     main(movies_path, outputs_path)
