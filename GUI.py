@@ -2,6 +2,14 @@ import tkinter as tk
 import os
 from tkinter import filedialog
 from tkinter import messagebox
+import PriFunctions
+
+'''
+pri = PriFunctions.PriFunctions()
+pri.make_rotate_movie()
+pri.capture_YTM()
+pri.trim_faces()
+'''
 
 root = tk.Tk()
 root.title('PriEditor')
