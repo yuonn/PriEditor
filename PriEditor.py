@@ -6,9 +6,12 @@ import PriFunctions
 
 root = tk.Tk()
 root.title('PriEditor')
-root.geometry('300x400')
+root.geometry('300x410')
 
 #ラベル
+label1 = tk.Label(text='＊＊＊＊＊＊＊＊＊フォルダ選択＊＊＊＊＊＊＊＊＊')
+label1.pack()
+
 def select_recmovie_dir(event):
     fTyp = [('','*')]
     iDir = os.path.abspath(os.path.dirname(__file__))
@@ -70,7 +73,7 @@ face_entry_button.bind('<Button-1>', select_face_dir)
 face_entry_button.pack()
 
 
-label2 = tk.Label(text='＊＊＊＊＊＊＊＊＊＊＊設定＊＊＊＊＊＊＊＊＊＊＊')
+label2 = tk.Label(text='＊＊＊＊＊＊＊＊＊＊処理選択＊＊＊＊＊＊＊＊＊＊')
 label2.pack()
 
 #実行ボタン
@@ -80,7 +83,7 @@ def run(event):
     global YTM_flag
     global face_flag
 
-    messagebox.showinfo('info','処理を開始しました')
+    messagebox.showinfo('info','処理を開始します')
     pri = PriFunctions.PriFunctions()
     
     pri.set_recmovie_dir(str(recmovie_entry.get()))
