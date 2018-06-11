@@ -83,7 +83,7 @@ def run(event):
     global YTM_flag
     global face_flag
 
-    messagebox.showinfo('info','処理を開始します')
+    messagebox.showinfo('PriEditor','処理を開始します')
     pri = PriFunctions.PriFunctions()
     
     pri.set_recmovie_dir(str(recmovie_entry.get()))
@@ -101,7 +101,7 @@ def run(event):
         pri.trim_faces()
         #messagebox.showinfo('info','顔画像のトリミングが終了しました')
 
-    messagebox.showinfo('info','全ての処理が終了しました')
+    messagebox.showinfo('PriEditor','全ての処理が終了しました')
 
 rot_flag = tk.BooleanVar()
 rot_flag.set(True)

@@ -100,7 +100,7 @@ class PriFunctions:
         
         frame_count = 0
         YTM_count = 0
-        while(cap.isOpened()):
+        while(YTM_count < 4):
             frame_count += 1
             ret, frame = cap.read()
             if ret == False or frame_count%20 != 0:
@@ -112,10 +112,39 @@ class PriFunctions:
                     YTM_count += 1
             except:
                 break
-            if YTM_count >= 12:
+
+        for interval in range(500):
+            ret, frame = cap.read()
+        
+        while(YTM_count < 8):
+            frame_count += 1
+            ret, frame = cap.read()
+            if ret == False or frame_count%20 != 0:
+                continue
+            try:
+                if ret and frame_count%20 == 0 and self.__flag_of_similarity(frame, temp_list):
+                    image_path = images_path + '/' + str(YTM_count) + '.png'
+                    cv2.imwrite(image_path, frame)
+                    YTM_count += 1
+            except:
                 break
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+
+        for interval in range(500):
+            ret, frame = cap.read()
+
+        while(YTM_count < 12):
+            frame_count += 1
+            ret, frame = cap.read()
+            if ret == False or frame_count%20 != 0:
+                continue
+            try:
+                if ret and frame_count%20 == 0 and self.__flag_of_similarity(frame, temp_list):
+                    image_path = images_path + '/' + str(YTM_count) + '.png'
+                    cv2.imwrite(image_path, frame)
+                    YTM_count += 1
+            except:
                 break
+        
 
         cap.release()
         cv2.destroyAllWindows()
