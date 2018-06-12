@@ -114,7 +114,7 @@ class PriFunctions:
                 break
 
         for interval in range(500):
-            ret, frame = cap.read()
+            cap.read()
         
         while(YTM_count < 8):
             frame_count += 1
@@ -130,7 +130,7 @@ class PriFunctions:
                 break
 
         for interval in range(500):
-            ret, frame = cap.read()
+            cap.read()
 
         while(YTM_count < 12):
             frame_count += 1
