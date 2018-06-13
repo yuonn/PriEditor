@@ -20,7 +20,7 @@ class PriFunctions:
         self.movie_dir = path
     
     def set_face_dir(self, path):
-        self.recmovie_dir = path
+        self.face_dir = path
     
     def set_YTM_dir(self, path):
         self.YTM_dir = path
