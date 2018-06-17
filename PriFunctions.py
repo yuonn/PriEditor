@@ -11,6 +11,7 @@ class PriFunctions:
         self.movie_dir = './outputs'
         self.face_dir = './faces'
         self.YTM_dir = './YTMshot'
+        self.face_interval = 50
     
 
     def set_recmovie_dir(self, path):
@@ -24,6 +25,9 @@ class PriFunctions:
     
     def set_YTM_dir(self, path):
         self.YTM_dir = path
+
+    def set_face_interval(self, value):
+        self.face_interval = int(value)
 
 
     def __rename_files(self, path, extension):
@@ -192,7 +196,7 @@ class PriFunctions:
         while(cap.isOpened()):
             frame_count += 1
             ret, frame = cap.read()
-            if frame_count%50 != 0:
+            if frame_count%self.face_interval != 0:
                 continue
             try:
                 faces = self.__face_detect(frame)
