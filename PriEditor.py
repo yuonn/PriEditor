@@ -153,11 +153,13 @@ def run(event):
 
     messagebox.showinfo('PriEditor','処理を開始します')
     progress_bar.start()
-
+    
     t1 = threading.Thread(target=main_loop)
     t1.start()
-    t2 = threading.Thread(target=main_process)
-    t2.start()
+    
+    t = threading.Thread(target=main_process)
+    t.start()
+    
 
     progress_bar.stop()
     messagebox.showinfo('PriEditor','全ての処理が終了しました')
