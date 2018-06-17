@@ -121,7 +121,7 @@ face_button = tk.Checkbutton(text='顔画像', variable=face_flag)
 face_button.grid( column=0, row=process_row+3,  columnspan=2 )
 
 
-run_button = tk.Button(text='実行！', bg='red')
+run_button = tk.Button(text='実行！')
 run_button.bind('<Button-1>', run)
 run_row = process_row + 4
 run_button.grid( column=0, row=run_row, columnspan=2, pady=10, ipady=5, ipadx=5)
