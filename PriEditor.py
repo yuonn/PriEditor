@@ -1,5 +1,7 @@
-import tkinter as tk
 import os
+import time
+import threading
+import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import ttk
@@ -7,7 +9,7 @@ import PriFunctions
 
 root = tk.Tk()
 root.title('PriEditor')
-root.geometry('300x410')
+root.geometry('295x425')
 
 #ラベル
 label1 = tk.Label(text='＊＊＊＊＊＊＊＊＊フォルダ選択＊＊＊＊＊＊＊＊＊')
@@ -87,9 +89,17 @@ def run(event):
     global face_flag
 
     messagebox.showinfo('PriEditor','処理を開始します')
-    progress_bar.start(100)
+    progress_bar.start()
+    t = threading.Thread(target=main_process)
+    t.start()
+    t.join()
+
+    progress_bar.stop()
+    messagebox.showinfo('PriEditor','全ての処理が終了しました')
+
+
+def main_process():
     pri = PriFunctions.PriFunctions()
-    
     pri.set_recmovie_dir(str(recmovie_entry.get()))
     pri.set_movie_dir(str(movie_entry.get()))
     pri.set_YTM_dir(str(YTM_entry.get()))
@@ -104,9 +114,6 @@ def run(event):
     if face_flag.get():
         pri.trim_faces()
         #messagebox.showinfo('info','顔画像のトリミングが終了しました')
-
-    progress_bar.stop()
-    messagebox.showinfo('PriEditor','全ての処理が終了しました')
     
 
 rot_flag = tk.BooleanVar()
@@ -131,9 +138,9 @@ run_row = process_row + 4
 run_button.grid( column=0, row=run_row, columnspan=2, pady=10, ipady=5, ipadx=5)
 
 
-# プログレスバー (不確定的)
+# プログレスバー
 progress_bar = ttk.Progressbar(root, orient='horizontal', mode='indeterminate')
-progress_bar.grid( column=0, row=run_row+1, columnspan=2, sticky=tk.N+tk.S+tk.E+tk.W)
+progress_bar.grid( column=0, row=run_row+1, columnspan=2, sticky=tk.E+tk.W)
 
 
 root.mainloop()
