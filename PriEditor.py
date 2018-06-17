@@ -76,7 +76,7 @@ face_entry_button.grid( column=1, row=folder_row+8, sticky=tk.N)
 
 label2 = tk.Label(text='＊＊＊＊＊＊＊＊＊＊処理選択＊＊＊＊＊＊＊＊＊＊')
 process_row = folder_row + 9
-label2.grid( column=0, row=process_row,  columnspan=2 ,pady=10)
+label2.grid( column=0, row=process_row,  columnspan=2, pady=10, sticky=tk.S)
 
 #実行ボタン
 def run(event):
