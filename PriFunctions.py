@@ -227,7 +227,7 @@ class PriFunctions:
         for temp in temp_list:
             temp = temp[30:temp.shape[0]-30, 30:temp.shape[1]-30]
             if gray.shape[0] >= temp.shape[0] and gray.shape[1] >= temp.shape[1]:
-                if self.__degree_of_similarity(gray, temp) > 0.9:
+                if self.__degree_of_similarity(gray, temp) > 0.8:
                     return False
         return True
 
