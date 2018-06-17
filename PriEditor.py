@@ -138,11 +138,11 @@ def select_face_dir(event):
 def run(event):
     #実行ボタンが押されたときの処理
     messagebox.showinfo('PriEditor','処理を開始します')
+    
     progress_bar.start()
     
     t = threading.Thread(target=main_process)
     t.start()
-    t.join()
 
     progress_bar.stop()
     messagebox.showinfo('PriEditor','全ての処理が終了しました')
@@ -161,7 +161,7 @@ def main_process():
         pri.capture_YTM()
     if face_flag.get():
         pri.trim_faces()
-        
+
 
 if __name__=='__main__':
     define_contents()
