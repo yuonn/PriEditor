@@ -7,7 +7,7 @@ import PriFunctions
 
 root = tk.Tk()
 root.title('PriEditor')
-root.geometry('300x410')
+root.geometry('295x410')
 
 #ラベル
 label1 = tk.Label(text='＊＊＊＊＊＊＊＊＊フォルダ選択＊＊＊＊＊＊＊＊＊')
@@ -87,7 +87,6 @@ def run(event):
     global face_flag
 
     messagebox.showinfo('PriEditor','処理を開始します')
-    progress_bar.start(100)
     pri = PriFunctions.PriFunctions()
     
     pri.set_recmovie_dir(str(recmovie_entry.get()))
@@ -129,11 +128,5 @@ run_button = tk.Button(text='実行！')
 run_button.bind('<Button-1>', run)
 run_row = process_row + 4
 run_button.grid( column=0, row=run_row, columnspan=2, pady=10, ipady=5, ipadx=5)
-
-
-# プログレスバー (不確定的)
-progress_bar = ttk.Progressbar(root, orient='horizontal', mode='indeterminate')
-progress_bar.grid( column=0, row=run_row+1, columnspan=2, sticky=tk.N+tk.S+tk.E+tk.W)
-
 
 root.mainloop()
