@@ -110,17 +110,17 @@ def run(event):
 
 rot_flag = tk.BooleanVar()
 rot_flag.set(True)
-rot_button = tk.Checkbutton(text='動画の回転', variable=rot_flag)
+rot_button = tk.Checkbutton(text='録画を90度回転', variable=rot_flag)
 rot_button.grid( column=0, row=process_row+1,  columnspan=2 )
 
 YTM_flag = tk.BooleanVar()
 YTM_flag.set(True)
-YTM_button = tk.Checkbutton(text='やってみた', variable=YTM_flag)
+YTM_button = tk.Checkbutton(text='やってみた！のキャプチャ', variable=YTM_flag)
 YTM_button.grid( column=0, row=process_row+2,  columnspan=2 )
 
 face_flag = tk.BooleanVar()
 face_flag.set(False)
-face_button = tk.Checkbutton(text='顔画像', variable=face_flag)
+face_button = tk.Checkbutton(text='顔画像のトリミング', variable=face_flag)
 face_button.grid( column=0, row=process_row+3,  columnspan=2 )
 
 
