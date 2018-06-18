@@ -161,7 +161,7 @@ class PriFunctions:
             match = cv2.matchTemplate(gray, temp, cv2.TM_CCOEFF_NORMED)
             min_value, max_value, min_pt, max_pt = cv2.minMaxLoc(match)
             print(max_value)
-            if max_value > 0.9:
+            if max_value > 0.85:
                 return True
 
         return False
