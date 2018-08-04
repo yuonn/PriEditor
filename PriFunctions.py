@@ -107,6 +107,8 @@ class PriFunctions:
         while(YTM_count < 4):
             frame_count += 1
             ret, frame = cap.read()
+            if frame is None:
+                break
             if ret == False or frame_count%20 != 0:
                 continue
             try:
@@ -119,10 +121,14 @@ class PriFunctions:
 
         for interval in range(500):
             cap.read()
+            if frame is None:
+                break
         
         while(YTM_count < 8):
             frame_count += 1
             ret, frame = cap.read()
+            if frame is None:
+                break
             if ret == False or frame_count%20 != 0:
                 continue
             try:
@@ -135,10 +141,14 @@ class PriFunctions:
 
         for interval in range(500):
             cap.read()
+            if frame is None:
+                break
 
         while(YTM_count < 12):
             frame_count += 1
             ret, frame = cap.read()
+            if frame is None:
+                break
             if ret == False or frame_count%20 != 0:
                 continue
             try:
@@ -196,6 +206,8 @@ class PriFunctions:
         while(cap.isOpened()):
             frame_count += 1
             ret, frame = cap.read()
+            if frame is None:
+                break
             if frame_count%self.face_interval != 0:
                 continue
             try:

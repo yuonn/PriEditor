@@ -104,7 +104,6 @@ def run(event):
         pri.trim_faces()
         #messagebox.showinfo('info','顔画像のトリミングが終了しました')
 
-    progress_bar.stop()
     messagebox.showinfo('PriEditor','全ての処理が終了しました')
     
 
