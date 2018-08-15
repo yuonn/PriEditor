@@ -54,6 +54,9 @@ class PriFunctions:
             movie_path = self.recmovie_dir + '/' + str(i) + '.mp4'
             output_path = self.movie_dir + '/' + str(i) + '.mp4'
             self.__rot_movie(movie_path, output_path)
+        
+        os.remove('./passlog-0.log')
+        os.remove('./passlog-0.log.mbtree')
 
 
     def __rot_movie(self, movie_path, output_path):

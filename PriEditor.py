@@ -113,7 +113,7 @@ rot_button = tk.Checkbutton(text='録画を90度回転', variable=rot_flag)
 rot_button.grid( column=0, row=process_row+1,  columnspan=2 )
 
 YTM_flag = tk.BooleanVar()
-YTM_flag.set(True)
+YTM_flag.set(False)
 YTM_button = tk.Checkbutton(text='やってみた！のキャプチャ', variable=YTM_flag)
 YTM_button.grid( column=0, row=process_row+2,  columnspan=2 )
 
